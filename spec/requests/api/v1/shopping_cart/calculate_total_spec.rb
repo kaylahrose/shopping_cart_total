@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Shopping cart api' do
   describe 'GET /calculate_total' do
     it '#calculate_total' do
-      params = {
+      data = {
         "cart": [
           {
             "item": "Product 1",
@@ -17,8 +17,8 @@ describe 'Shopping cart api' do
           }
         ]
       }
-    
-      post "/api/v1/calculate_total", params: JSON.generate(params: params)
+      headers = { "CONTENT_TYPE" => "application/json" }
+      post "/api/v1/calculate_total", headers: headers, params: JSON.generate(data)
       response.body = JSON.parse(response.body, symbolize_names: true)
 
       expect(response).to be_successful
